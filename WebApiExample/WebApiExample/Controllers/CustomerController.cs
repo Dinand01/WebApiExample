@@ -63,29 +63,5 @@ namespace WebApiExample.Controllers
 
             return result;
         }
-
-        [HttpGet]
-        public List<Customer> Get()
-        {
-            return new List<Customer>
-            {
-                new Customer
-                {
-                    CustomerID = 1,
-                    Email = "temp",
-                    Name = "temp",
-                    Transactions = new List<Transaction>
-                    {
-                        new Transaction
-                        {
-                            Date = new DateTime(2019, 1, 1, 12, 1, 0),
-                            Currency = CurrencyCode.JPY,
-                            Status = TransactionStatus.Failed
-                        }
-                    }
-                }
-            };
-        }
-
     }
 }
