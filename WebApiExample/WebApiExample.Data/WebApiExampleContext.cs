@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApiExample.Data.Entities;
+using WebApiExample.Data.Extensions;
 
 namespace WebApiExample.Data
 {
@@ -34,6 +35,9 @@ namespace WebApiExample.Data
                 .HasColumnType("varchar(10)")
                 .HasConversion(new EnumToStringConverter<Domain.TransactionStatus>());
             transation.Property(t => t.CustomerID).HasColumnType("decimal(10)");
+
+            // For development and demo only
+            modelBuilder.Seed();
         }
 
         private void MigrateDatabase()

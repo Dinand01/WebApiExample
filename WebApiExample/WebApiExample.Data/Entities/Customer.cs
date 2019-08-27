@@ -19,6 +19,6 @@ namespace WebApiExample.Data.Entities
 
         public long Mobile { get; set; }
 
-        public virtual IQueryable<Transaction> Transactions { get; set; }
+        public virtual IEnumerable<Transaction> Transactions { get; set; }
     }
 }

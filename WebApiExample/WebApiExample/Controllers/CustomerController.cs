@@ -22,17 +22,27 @@ namespace WebApiExample.Controllers
 
         [Route("email/{email}")]
         [HttpGet]
-        public async Task<Customer> Get(string email)
+        public async Task<ActionResult<Customer>> Get(string email)
         {
-            var result = await _customerRepository.GetCustomer(email, 10);
+            var result = await _customerRepository.GetCustomer(email, 5);
+            if (result == null)
+            {
+                return NotFound();
+            }
+
             return result;
         }
 
         [Route("{id}")]
         [HttpGet]
-        public async Task<Customer> Get(long id)
+        public async Task<ActionResult<Customer>> Get(long id)
         {
-            var result = await _customerRepository.GetCustomer(id, 10);
+            var result = await _customerRepository.GetCustomer(id, 5);
+            if (result == null)
+            {
+                return NotFound();
+            }
+
             return result;
         }
 
