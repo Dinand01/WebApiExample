@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Text;
 
 namespace WebApiExample.Data.Entities
@@ -18,6 +19,6 @@ namespace WebApiExample.Data.Entities
 
         public long Mobile { get; set; }
 
-        public virtual List<Transaction> Transactions { get; set; }
+        public virtual IQueryable<Transaction> Transactions { get; set; }
     }
 }

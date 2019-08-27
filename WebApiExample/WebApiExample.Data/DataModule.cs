@@ -1,5 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using WebApiExample.Data.Mapper;
+using WebApiExample.Data.Repositories;
 
 namespace WebApiExample.Data
 {
@@ -11,6 +14,10 @@ namespace WebApiExample.Data
             {
                 options.UseSqlServer(dbConnection);
             });
+
+            services.AddAutoMapper(typeof(MapperProfile));
+
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
         }
     }
 }

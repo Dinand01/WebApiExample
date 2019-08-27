@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApiExample.Data.Repositories;
 using WebApiExample.Domain;
 
 namespace WebApiExample.Controllers
@@ -12,6 +13,30 @@ namespace WebApiExample.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
+        private readonly ICustomerRepository _customerRepository;
+
+        public CustomerController(ICustomerRepository customerRepository)
+        {
+            _customerRepository = customerRepository;
+        }
+
+        [Route("email/{email}")]
+        [HttpGet]
+        public async Task<Customer> Get(string email)
+        {
+            var result = await _customerRepository.GetCustomer(email, 10);
+            return result;
+        }
+
+        [Route("{id}")]
+        [HttpGet]
+        public async Task<Customer> Get(long id)
+        {
+            var result = await _customerRepository.GetCustomer(id, 10);
+            return result;
+        }
+
+        [HttpGet]
         public List<Customer> Get()
         {
             return new List<Customer>
