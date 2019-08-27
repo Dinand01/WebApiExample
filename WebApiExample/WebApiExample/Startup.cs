@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Converters;
 using WebApiExample.Data;
 using WebApiExample.Serialization;
+using WebApiExample.Validation;
 
 namespace WebApiExample
 {
@@ -22,13 +23,16 @@ namespace WebApiExample
         {
             DataModule.Configure(services, "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=WebApiExample;Integrated Security=SSPI;");
 
-            services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddJsonOptions(option => 
-                {
-                    option.SerializerSettings.Converters.Add(new WebApiExampleDateTimeConverter());
-                    option.SerializerSettings.Converters.Add(new StringEnumConverter());
-                });
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new ValidationFilter());
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            .AddJsonOptions(option => 
+            {
+                option.SerializerSettings.Converters.Add(new WebApiExampleDateTimeConverter());
+                option.SerializerSettings.Converters.Add(new StringEnumConverter());
+            });
 
             services.AddSwaggerGen(c =>
             {

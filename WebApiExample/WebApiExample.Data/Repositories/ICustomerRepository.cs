@@ -11,5 +11,7 @@ namespace WebApiExample.Data.Repositories
         Task<Customer> GetCustomer(long id, int maxAmountOfTransactions);
 
         Task<Customer> GetCustomer(string email, int maxAmountOfTransactions);
+
+        Task<Customer> GetCustomer(long? id, string email, int maxAmountOfTransactions);
     }
 }

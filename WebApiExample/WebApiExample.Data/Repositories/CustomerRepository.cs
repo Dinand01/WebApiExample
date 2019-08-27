@@ -32,6 +32,13 @@ namespace WebApiExample.Data.Repositories
             return _mapper.Map<Customer>(customer);
         }
 
+        public async Task<Customer> GetCustomer(long? id, string email, int maxAmountOfTransactions)
+        {
+            var customer = await GetCustomersWithLastTransactions(maxAmountOfTransactions)
+                .SingleOrDefaultAsync(c => (email == null || c.Email == email) && (id == null || c.ID == id));
+            return _mapper.Map<Customer>(customer);
+        }
+
         private IQueryable<Entities.Customer> GetCustomersWithLastTransactions(int amountOfTransactions)
         {
             return _context.Customers
