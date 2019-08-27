@@ -19,7 +19,8 @@ namespace WebApiExample
 
         public void ConfigureServices(IServiceCollection services)
         {
-            DataModule.Configure(services, "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=WebApiExample;Integrated Security=SSPI;");
+            string connection = Configuration.GetConnectionString("DataSource");
+            DataModule.Configure(services, connection);
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
