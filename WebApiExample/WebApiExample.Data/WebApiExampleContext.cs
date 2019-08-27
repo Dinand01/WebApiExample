@@ -21,6 +21,7 @@ namespace WebApiExample.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var customer = modelBuilder.Entity<Customer>();
+            customer.HasIndex(c => c.Email).IsUnique();
             customer.Property(c => c.ID).HasColumnType("decimal(10)");
             customer.Property(c => c.Name).HasColumnType("varchar(30)");
             customer.Property(c => c.Email).HasColumnType("varchar(25)");
