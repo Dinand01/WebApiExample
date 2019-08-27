@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Converters;
+using WebApiExample.Serialization;
 
 namespace WebApiExample
 {
@@ -17,7 +19,13 @@ namespace WebApiExample
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(option => 
+                {
+                    option.SerializerSettings.Converters.Add(new WebApiExampleDateTimeConverter());
+                    option.SerializerSettings.Converters.Add(new StringEnumConverter());
+                });
 
             services.AddSwaggerGen(c =>
             {
