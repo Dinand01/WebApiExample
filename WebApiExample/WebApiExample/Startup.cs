@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Converters;
+using WebApiExample.Data;
 using WebApiExample.Serialization;
 
 namespace WebApiExample
@@ -19,6 +20,8 @@ namespace WebApiExample
 
         public void ConfigureServices(IServiceCollection services)
         {
+            DataModule.Configure(services, "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=WebApiExample;Integrated Security=SSPI;");
+
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(option => 

@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WebApiExample.Data\WebApiExample.Data.csproj" />
     <ProjectReference Include="..\WebApiExample.Domain\WebApiExample.Domain.csproj" />
   </ItemGroup>
 
